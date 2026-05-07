@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>放學後如果聽到廣播點名</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="min-h-screen bg-slate-950 text-slate-100">
+  <div class="noise-layer"></div>
+  <div class="scanline-layer"></div>
+
+  <main class="relative z-10 min-h-screen">
+    <header class="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-4 sm:px-6">
+      <div>
+        <p class="text-xs tracking-[0.28em] text-cyan-300/80">CAMPUS MYSTERY CASE FILE</p>
+        <h1 class="mt-1 text-xl font-black sm:text-3xl">放學後如果聽到廣播點名</h1>
+      </div>
+      <div class="flex items-center gap-2">
+        <button id="audioToggle" class="hud-button" type="button" aria-label="切換雨聲">雨聲 OFF</button>
+        <button id="resetBtn" class="hud-button danger" type="button">重置</button>
+      </div>
+    </header>
+
+    <section class="mx-auto grid max-w-7xl gap-4 px-4 pb-6 sm:px-6 lg:grid-cols-[1.15fr_0.85fr]">
+      <div class="space-y-4">
+        <section class="screen-panel overflow-hidden">
+          <div id="sceneImage" class="scene-image classroom">
+            <div class="scene-dark"></div>
+            <div class="broadcast-light"></div>
+            <div class="absolute bottom-4 left-4 right-4 flex items-end justify-between gap-4">
+              <div>
+                <p id="chapterLabel" class="chapter-label">CH1 放學後的廣播</p>
+                <h2 id="locationTitle" class="text-2xl font-black text-white sm:text-4xl">三年二班教室</h2>
+              </div>
+              <div id="caseStatus" class="status-chip">調查開始</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="screen-panel p-4 sm:p-5">
+          <div class="flex gap-4">
+            <div id="avatar" class="avatar-box" aria-label="角色頭像">
+              <span id="avatarInitial">澄</span>
+            </div>
+            <div class="min-w-0 flex-1">
+              <div class="mb-2 flex flex-wrap items-center justify-between gap-2">
+                <h3 id="speakerName" class="text-lg font-bold text-cyan-100">林澄</h3>
+                <span id="modeBadge" class="rounded border border-cyan-300/30 px-2 py-1 text-xs text-cyan-200">對話</span>
+              </div>
+              <p id="dialogueText" class="dialogue-text"></p>
+              <div class="mt-4 flex flex-wrap gap-2">
+                <button id="nextBtn" class="primary-button" type="button">繼續</button>
+                <button id="investigateBtn" class="secondary-button hidden" type="button">開始調查</button>
+                <button id="deductionBtn" class="secondary-button hidden" type="button">進入反駁</button>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <aside class="space-y-4">
+        <section class="screen-panel p-4">
+          <div class="mb-3 flex items-center justify-between">
+            <h2 class="panel-title">探索地點</h2>
+            <span id="progressText" class="text-xs text-slate-400">線索 0 / 4</span>
+          </div>
+          <div id="locationGrid" class="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2"></div>
+        </section>
+
+        <section class="screen-panel p-4">
+          <div class="mb-3 flex items-center justify-between">
+            <h2 class="panel-title">證物欄</h2>
+            <span class="text-xs text-cyan-200/70">點選可檢視</span>
+          </div>
+          <div id="evidenceList" class="evidence-grid"></div>
+          <div id="evidenceDetail" class="mt-3 rounded border border-slate-700/70 bg-slate-950/60 p-3 text-sm text-slate-300">
+            尚未取得證物。探索校園，找出被「大家」藏起來的記憶。
+          </div>
+        </section>
+
+        <section id="deductionPanel" class="screen-panel hidden p-4">
+          <h2 class="panel-title mb-2">推理反駁</h2>
+          <p class="mb-3 text-sm text-slate-400">選擇一段證詞，再提出能戳破矛盾的證據。</p>
+          <div id="testimonyList" class="space-y-2"></div>
+          <div class="mt-3">
+            <label for="evidenceSelect" class="mb-1 block text-sm text-cyan-100">提出證據</label>
+            <select id="evidenceSelect" class="w-full rounded border border-slate-600 bg-slate-950 p-2 text-sm text-slate-100"></select>
+          </div>
+          <button id="refuteBtn" class="primary-button mt-3 w-full" type="button">反駁！</button>
+          <p id="deductionResult" class="mt-3 min-h-6 text-sm text-slate-300"></p>
+        </section>
+      </aside>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
