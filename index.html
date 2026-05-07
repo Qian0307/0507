@@ -19,6 +19,7 @@
         <h1 class="mt-1 text-xl font-black sm:text-3xl">放學後如果聽到廣播點名</h1>
       </div>
       <div class="flex flex-wrap items-center gap-2">
+        <button id="hintBtn" class="hud-button" type="button">提示</button>
         <button id="saveBtn" class="hud-button" type="button">儲存</button>
         <button id="loadBtn" class="hud-button" type="button">讀取</button>
         <button id="audioToggle" class="hud-button" type="button" aria-label="切換雨聲">雨聲 OFF</button>
@@ -67,13 +68,39 @@
           <h2 class="panel-title mb-2">遊戲流程</h2>
           <div class="grid gap-2 text-sm text-slate-300 sm:grid-cols-3">
             <p><strong class="text-cyan-100">1. 閱讀</strong><br />觀察敘述中的矛盾與刻意省略。</p>
-            <p><strong class="text-cyan-100">2. 搜證</strong><br />探索五個校園地點，取得四項證物。</p>
+            <p><strong class="text-cyan-100">2. 搜證</strong><br />探索五個校園地點，取得十二項證物。</p>
             <p><strong class="text-cyan-100">3. 反駁</strong><br />用證物擊破證詞，拼回被刪除的人。</p>
+          </div>
+        </section>
+
+        <section class="screen-panel p-4">
+          <h2 class="panel-title mb-2">案件手冊</h2>
+          <div class="manual-grid">
+            <details open>
+              <summary>劇情架構</summary>
+              <p>CH1 用廣播點名建立懸疑；CH2 透過校園探索取得證物；CH3 讓玩家用推理面對「集體沉默」這個真正的恐怖來源。</p>
+            </details>
+            <details>
+              <summary>閱讀理解重點</summary>
+              <p>玩家需要分辨傳聞、證詞與物證的差異，從角色逃避回答的語氣中推論霸凌與記憶改寫。</p>
+            </details>
+            <details>
+              <summary>後續擴充</summary>
+              <p>可加入時間線排序、多人證詞交叉詢問、教室座位圖推理，以及依選擇變化的班級後日談。</p>
+            </details>
           </div>
         </section>
       </div>
 
       <aside class="space-y-4">
+        <section class="screen-panel p-4">
+          <div class="mb-2 flex items-center justify-between gap-2">
+            <h2 class="panel-title">目前目標</h2>
+            <span id="objectiveStep" class="text-xs text-cyan-200/70">01</span>
+          </div>
+          <p id="objectiveText" class="text-sm leading-6 text-slate-300">閱讀開場對話，確認廣播多出的名字。</p>
+        </section>
+
         <section class="screen-panel p-4">
           <div class="mb-3 flex items-center justify-between">
             <h2 class="panel-title">探索地點</h2>
@@ -93,6 +120,11 @@
           </div>
         </section>
 
+        <section class="screen-panel p-4">
+          <h2 class="panel-title mb-2">調查紀錄</h2>
+          <ol id="caseLog" class="case-log"></ol>
+        </section>
+
         <section id="deductionPanel" class="screen-panel hidden p-4">
           <h2 class="panel-title mb-2">推理反駁</h2>
           <p class="mb-3 text-sm text-slate-400">選擇一段證詞，再提出能戳破矛盾的證據。</p>
@@ -103,6 +135,22 @@
           </div>
           <button id="refuteBtn" class="primary-button mt-3 w-full" type="button">反駁！</button>
           <p id="deductionResult" class="mt-3 min-h-6 text-sm text-slate-300"></p>
+        </section>
+
+        <section id="timelinePanel" class="screen-panel hidden p-4">
+          <h2 class="panel-title mb-2">時間線重建</h2>
+          <p class="mb-3 text-sm text-slate-400">依照證物，把三年前失蹤當天的事件排成正確順序。</p>
+          <div id="timelineSlots" class="space-y-2"></div>
+          <button id="timelineCheckBtn" class="primary-button mt-3 w-full" type="button">檢查時間線</button>
+          <p id="timelineResult" class="mt-3 min-h-6 text-sm text-slate-300"></p>
+        </section>
+
+        <section id="readingPanel" class="screen-panel hidden p-4">
+          <h2 class="panel-title mb-2">閱讀理解審問</h2>
+          <p class="mb-3 text-sm text-slate-400">最後不是考記憶，而是考你能不能讀出「誰在迴避」。</p>
+          <div id="readingQuestions" class="space-y-3"></div>
+          <button id="readingCheckBtn" class="primary-button mt-3 w-full" type="button">提交判斷</button>
+          <p id="readingResult" class="mt-3 min-h-6 text-sm text-slate-300"></p>
         </section>
 
         <section id="choicePanel" class="screen-panel hidden p-4">
